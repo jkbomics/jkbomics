@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI-driven bioinformatics solutions, NGS analysis, custom pipelines, workflow automation, and computational biology services by JKBomics.">
+  <title>JKBomics</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+  <style>
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; }
+.mono { font-family: 'JetBrains Mono', monospace; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+@keyframes float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-12px); } }
+@keyframes pulse-slow { 0%,100% { opacity:.15; } 50% { opacity:.3; } }
+.fade-up { animation: fadeUp .7s ease both; }
+.fade-up-d1 { animation-delay:.1s; }
+.fade-up-d2 { animation-delay:.2s; }
+.fade-up-d3 { animation-delay:.3s; }
+.fade-up-d4 { animation-delay:.4s; }
+.float-anim { animation: float 6s ease-in-out infinite; }
+.float-anim-d { animation: float 6s ease-in-out 2s infinite; }
+.pulse-bg { animation: pulse-slow 4s ease-in-out infinite; }
+
+/* DNA helix background */
+.dna-bg { position:relative; overflow:hidden; }
+.dna-bg::before {
+  content:''; position:absolute; inset:0; opacity:.06;
+  background-image:
+    radial-gradient(circle at 20% 50%, #0ea5e9 1px, transparent 1px),
+    radial-gradient(circle at 80% 30%, #0ea5e9 1px, transparent 1px),
+    radial-gradient(circle at 60% 70%, #0ea5e9 1px, transparent 1px),
+    radial-gradient(circle at 40% 20%, #0ea5e9 1px, transparent 1px);
+  background-size: 80px 80px, 120px 120px, 60px 60px, 100px 100px;
+}
+
+.service-card { transition: transform .3s, box-shadow .3s; }
+.service-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(11,60,93,.12); }
+.tool-card { transition: transform .3s, border-color .3s; }
+.tool-card:hover { transform: translateY(-3px); border-color: #0ea5e9; }
+</style>
+  <script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        navy: '#0B3C5D',
+        'navy-dark': '#072a42',
+        teal: '#0ea5e9',
+        'teal-dark': '#0284c7',
+        slate: '#f8fafc',
+      }
+    }
+  }
+}
+</script>
+  <style>body { box-sizing: border-box; }</style>
+  
+ <script>
+window.elementSdk = { init: function(){}, setConfig: function(){}, config: {} };
+</script>
+</head>
+ <body class="h-full">
+  <div id="app" class="w-full h-full overflow-auto bg-white" style="color:#1e293b;"><!-- Nav -->
+   <nav id="nav" class="fixed top-0 left-0 w-full z-50 transition-all duration-300" style="background:rgba(255,255,255,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(11,60,93,.08);">
+    <div class="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between"><a href="#hero" class="flex items-center gap-4">
+      <div class="flex items-center gap-4">
+		<img src="frontend/assets/logo.svg" alt="jkbomics logo" class="h-24 w-auto" style="min-width:120px;">
+	  </div>
+	<div class="hidden md:flex items-center gap-8 text-sm font-medium" style="color:#475569;"><a href="#about" class="hover:text-navy transition-colors">About</a> <a href="#services" class="hover:text-navy transition-colors">Services</a> <a href="#tools" class="hover:text-navy transition-colors">Tools</a> <a href="#contact" class="bg-navy text-white px-4 py-2 rounded-lg hover:bg-navy-dark transition-colors">Contact</a>
+     </div><button id="mobile-toggle" class="md:hidden p-2" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')"> <i data-lucide="menu" style="width:22px;height:22px;color:#0B3C5D;"></i> </button>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 flex flex-col gap-3 text-sm font-medium" style="color:#475569;"><a href="#about" class="py-2 hover:text-navy" onclick="document.getElementById('mobile-menu').classList.add('hidden')">About</a> <a href="#services" class="py-2 hover:text-navy" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Services</a> <a href="#tools" class="py-2 hover:text-navy" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Tools</a> <a href="#contact" class="py-2 bg-navy text-white px-4 rounded-lg text-center" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Contact</a>
+    </div>
+   </nav><!-- Hero -->
+   <section id="hero" class="dna-bg relative pt-28 pb-20 md:pt-40 md:pb-32 px-6" style="background:linear-gradient(135deg,#0B3C5D 0%,#072a42 40%,#0B3C5D 100%);"><!-- Floating orbs -->
+    <div class="absolute top-20 left-[10%] w-64 h-64 rounded-full pulse-bg" style="background:radial-gradient(circle,#0ea5e9,transparent 70%);"></div>
+    <div class="absolute bottom-10 right-[15%] w-48 h-48 rounded-full pulse-bg" style="background:radial-gradient(circle,#06b6d4,transparent 70%);animation-delay:2s;"></div>
+    <div class="max-w-5xl mx-auto relative z-10 text-center">
+     <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6 fade-up" style="background:rgba(14,165,233,.15);border:1px solid rgba(14,165,233,.25);"><span class="w-2 h-2 rounded-full bg-teal"></span> <span class="mono text-xs text-teal">Available for collaboration</span>
+     </div>
+     <h1 id="hero-title" class="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 fade-up fade-up-d1">JKBomics – AI-driven Bioinformatics<br class="hidden md:block">
+       &amp; NGS Data Solutions</h1>
+     <p id="hero-subtitle" class="text-base md:text-xl max-w-2xl mx-auto mb-10 fade-up fade-up-d2" style="color:rgba(255,255,255,.7);">Empowering genomics research with scalable pipelines, intelligent analysis, and automation.</p>
+     <div class="flex flex-col sm:flex-row gap-4 justify-center fade-up fade-up-d3"><a href="#services" class="px-7 py-3.5 rounded-xl font-semibold text-navy transition-all hover:shadow-lg hover:shadow-teal/20" style="background:#0ea5e9;"> Explore Services </a> <a href="#tools" class="px-7 py-3.5 rounded-xl font-semibold text-white transition-all hover:bg-white/10" style="border:1px solid rgba(255,255,255,.25);"> View Tools </a>
+     </div><!-- Floating molecule graphic -->
+     <div class="mt-16 flex justify-center gap-8">
+      <svg class="float-anim" width="60" height="60" viewBox="0 0 60 60" fill="none" style="opacity:.4;"><circle cx="30" cy="10" r="6" stroke="#0ea5e9" stroke-width="1.5" /><circle cx="10" cy="50" r="6" stroke="#0ea5e9" stroke-width="1.5" /><circle cx="50" cy="50" r="6" stroke="#0ea5e9" stroke-width="1.5" /><line x1="30" y1="16" x2="12" y2="45" stroke="#0ea5e9" stroke-width="1" /><line x1="30" y1="16" x2="48" y2="45" stroke="#0ea5e9" stroke-width="1" /><line x1="16" y1="50" x2="44" y2="50" stroke="#0ea5e9" stroke-width="1" />
+      </svg>
+      <svg class="float-anim-d" width="40" height="40" viewBox="0 0 40 40" fill="none" style="opacity:.3;"><circle cx="20" cy="8" r="5" stroke="#06b6d4" stroke-width="1.5" /><circle cx="8" cy="32" r="5" stroke="#06b6d4" stroke-width="1.5" /><circle cx="32" cy="32" r="5" stroke="#06b6d4" stroke-width="1.5" /><line x1="20" y1="13" x2="10" y2="28" stroke="#06b6d4" stroke-width="1" /><line x1="20" y1="13" x2="30" y2="28" stroke="#06b6d4" stroke-width="1" />
+      </svg>
+     </div>
+    </div>
+   </section><!-- About -->
+   <section id="about" class="py-20 md:py-28 px-6" style="background:#f8fafc;">
+    <div class="max-w-5xl mx-auto">
+     <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div><span class="mono text-xs font-medium text-teal tracking-wider uppercase">About</span>
+       <h2 class="text-3xl md:text-4xl font-bold text-navy mt-3 mb-6">Bioinformatics, elevated.</h2>
+       <p id="about-text" class="leading-relaxed mb-6" style="color:#64748b;">Freelance bioinformatician specializing in RNA-Seq, metagenomics, whole genome sequencing, and custom pipeline development. I integrate AI-driven approaches into every workflow — delivering scalable, reproducible, and research-grade results for both academic and industry projects.</p>
+       <div class="flex flex-wrap gap-2"><span class="mono text-xs px-3 py-1.5 rounded-full bg-navy/5 text-navy">RNA-Seq</span> <span class="mono text-xs px-3 py-1.5 rounded-full bg-navy/5 text-navy">Metagenomics</span> <span class="mono text-xs px-3 py-1.5 rounded-full bg-navy/5 text-navy">WGS</span> <span class="mono text-xs px-3 py-1.5 rounded-full bg-navy/5 text-navy">Nextflow</span> <span class="mono text-xs px-3 py-1.5 rounded-full bg-navy/5 text-navy">AI/ML</span> <span class="mono text-xs px-3 py-1.5 rounded-full bg-navy/5 text-navy">Python</span>
+       </div>
+      </div>
+      <div class="relative">
+       <div class="rounded-2xl p-8" style="background:linear-gradient(135deg,#0B3C5D,#072a42);border:1px solid rgba(14,165,233,.15);">
+        <div class="mono text-xs mb-4" style="color:#64748b;">
+         // workflow.nf
+        </div>
+        <pre class="mono text-sm leading-relaxed" style="color:#94a3b8;"><span style="color:#0ea5e9;">process</span> <span style="color:#fff;">align_reads</span> {
+  <span style="color:#0ea5e9;">input:</span> path(reads)
+  <span style="color:#0ea5e9;">output:</span> path("*.bam")
+
+  <span style="color:#64748b;">"""</span>
+  <span style="color:#94a3b8;">STAR --runMode alignReads \</span>
+    <span style="color:#94a3b8;">--readFilesIn ${reads}</span>
+  <span style="color:#64748b;">"""</span>
+}</pre>
+        <div class="mt-4 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> <span class="mono text-xs" style="color:#64748b;">Pipeline ready</span>
+        </div>
+       </div>
+       <div class="absolute -bottom-4 -right-4 w-24 h-24 rounded-xl float-anim" style="background:linear-gradient(135deg,#0ea5e9,#06b6d4);opacity:.1;"></div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Services -->
+   <section id="services" class="py-20 md:py-28 px-6 bg-white">
+    <div class="max-w-5xl mx-auto">
+     <div class="text-center mb-16"><span class="mono text-xs font-medium text-teal tracking-wider uppercase">Services</span>
+      <h2 class="text-3xl md:text-4xl font-bold text-navy mt-3">NGS Analysis &amp; Beyond</h2>
+     </div>
+     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="service-card rounded-2xl p-6 border" style="border-color:#e2e8f0;background:#fff;">
+       <div class="w-12 h-12 rounded-xl bg-teal/10 flex items-center justify-center mb-4"><i data-lucide="bar-chart-3" style="width:22px;height:22px;color:#0ea5e9;"></i>
+       </div>
+       <h3 class="font-bold text-navy text-lg mb-2">RNA-Seq Analysis</h3>
+       <p class="text-sm leading-relaxed mb-4" style="color:#64748b;">End-to-end pipeline: QC → Alignment → Differential Expression → Functional Analysis.</p>
+       <div class="flex flex-wrap gap-1.5"><span class="mono text-[10px] px-2 py-1 rounded bg-slate text-navy/60">DESeq2</span> <span class="mono text-[10px] px-2 py-1 rounded bg-slate text-navy/60">STAR</span> <span class="mono text-[10px] px-2 py-1 rounded bg-slate text-navy/60">GO/KEGG</span>
+       </div>
+      </div>
+      <div class="service-card rounded-2xl p-6 border" style="border-color:#e2e8f0;background:#fff;">
+       <div class="w-12 h-12 rounded-xl bg-teal/10 flex items-center justify-center mb-4"><i data-lucide="layers" style="width:22px;height:22px;color:#0ea5e9;"></i>
+       </div>
+       <h3 class="font-bold text-navy text-lg mb-2">Metagenomics</h3>
+       <p class="text-sm leading-relaxed mb-4" style="color:#64748b;">Taxonomy profiling, alpha/beta diversity, and pathway analysis for microbial communities.</p>
+       <div class="flex flex-wrap gap-1.5"><span class="mono text-[10px] px-2 py-1 rounded bg-slate text-navy/60">Kraken2</span> <span class="mono text-[10px] px-2 py-1 rounded bg-slate text-navy/60">HUMAnN</span> <span class="mono text-[10px] px-2 py-1 rounded bg-slate text-navy/60">QIIME2</span>
+       </div>
+      </div>
+      <div class="service-card rounded-2xl p-6 border" style="border-color:#e2e8f0;background:#fff;">
+       <div class="w-12 h-12 rounded-xl bg-teal/10 flex items-center justify-center mb-4"><i data-lucide="dna" style="width:22px;height:22px;color:#0ea5e9;"></i>
+       </div>
+       <h3 class="font-bold text-navy text-lg mb-2">Whole Genome Sequencing</h3>
+       <p class="text-sm leading-relaxed mb-4" style="color:#64748b;">Variant calling, SNP analysis, structural variation detection, and genome annotation.</p>
+       <div class="flex flex-wrap gap-1.5"><span class="mono text-[10px] px-2 py-1 rounded bg-slate text-navy/60">GATK</span> <span class="mono text-[10px] px-2 py-1 rounded bg-slate text-navy/60">BWA</span> <span class="mono text-[10px] px-2 py-1 rounded bg-slate text-navy/60">SnpEff</span>
+       </div>
+      </div>
+      <div class="service-card rounded-2xl p-6 border" style="border-color:#e2e8f0;background:#fff;">
+       <div class="w-12 h-12 rounded-xl bg-teal/10 flex items-center justify-center mb-4"><i data-lucide="git-branch" style="width:22px;height:22px;color:#0ea5e9;"></i>
+       </div>
+       <h3 class="font-bold text-navy text-lg mb-2">Custom Pipelines</h3>
+       <p class="text-sm leading-relaxed mb-4" style="color:#64748b;">Nextflow-based automated workflows tailored to your research needs — reproducible and scalable.</p>
+       <div class="flex flex-wrap gap-1.5"><span class="mono text-[10px] px-2 py-1 rounded bg-slate text-navy/60">Nextflow</span> <span class="mono text-[10px] px-2 py-1 rounded bg-slate text-navy/60">Docker</span> <span class="mono text-[10px] px-2 py-1 rounded bg-slate text-navy/60">CI/CD</span>
+       </div>
+      </div>
+      <div class="service-card rounded-2xl p-6 border md:col-span-2 lg:col-span-2" style="border-color:#e2e8f0;background:linear-gradient(135deg,#0B3C5D,#072a42);">
+       <div class="flex flex-col sm:flex-row sm:items-center gap-6">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(14,165,233,.15);"><i data-lucide="brain" style="width:22px;height:22px;color:#0ea5e9;"></i>
+        </div>
+        <div>
+         <h3 class="font-bold text-white text-lg mb-2">AI-based Bioinformatics Tools</h3>
+         <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,.6);">Smart gene and pathway interpretation powered by machine learning. Automated insight extraction from complex multi-omics data.</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Tools -->
+   <section id="tools" class="py-20 md:py-28 px-6" style="background:#f8fafc;">
+    <div class="max-w-5xl mx-auto">
+     <div class="text-center mb-16"><span class="mono text-xs font-medium text-teal tracking-wider uppercase">Tools &amp; Projects</span>
+      <h2 class="text-3xl md:text-4xl font-bold text-navy mt-3">Open Source Work</h2>
+     </div>
+     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="tool-card rounded-2xl p-6 bg-white border border-slate-200 flex flex-col">
+       <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-lg bg-navy flex items-center justify-center"><i data-lucide="code-2" style="width:18px;height:18px;color:#0ea5e9;"></i>
+        </div><span class="mono font-semibold text-navy">BioCodePy-Chronicles</span>
+       </div>
+       <p class="text-sm leading-relaxed flex-1 mb-5" style="color:#64748b;">BioCodePy Chronicles is an interactive, story-driven bioinformatics learning game where players become scientists at the futuristic JKBomics Research HQ. Solve missions, decode genomes, and explore biological mysteries while mastering Python, R, and Shell scripting in a gamified and immersive environment.</p><a href="https://biocodepy.jkbomics.com/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 mono text-xs font-medium text-teal hover:text-teal-dark transition-colors"> <i data-lucide="github" style="width:14px;height:14px;"></i>Play Now </a>
+      </div>
+      <div class="tool-card rounded-2xl p-6 bg-white border border-slate-200 flex flex-col">
+       <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-lg bg-navy flex items-center justify-center"><i data-lucide="sparkles" style="width:18px;height:18px;color:#0ea5e9;"></i>
+        </div><span class="mono font-semibold text-navy">Gene2Function</span>
+       </div>
+       <p class="text-sm leading-relaxed flex-1 mb-5" style="color:#64748b;">Gene2Function is a modular, multi-page, Streamlit-based bioinformatics tool that takes gene IDs or symbols as input and provides predicted functional annotations, associated pathways, and potential disease links. Built for speed and usability, this app empowers researchers to quickly extract and explore gene-level biological insights.</p><a href="https://github.com/jkbomics/Gene2Function" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 mono text-xs font-medium text-teal hover:text-teal-dark transition-colors"> <i data-lucide="github" style="width:14px;height:14px;"></i>View on GitHub </a>
+      </div>
+      <div class="tool-card rounded-2xl p-6 bg-white border border-slate-200 flex flex-col">
+       <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-lg bg-navy flex items-center justify-center"><i data-lucide="workflow" style="width:18px;height:18px;color:#0ea5e9;"></i>
+        </div><span class="mono font-semibold text-navy">Nextflow Pipelines</span>
+       </div>
+       <p class="text-sm leading-relaxed flex-1 mb-5" style="color:#64748b;">Reproducible and scalable NGS workflows built with Nextflow for seamless deployment.</p><a href="https://github.com/jkbomics/different-bioinformatics-pipelines" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 mono text-xs font-medium text-teal hover:text-teal-dark transition-colors"> <i data-lucide="github" style="width:14px;height:14px;"></i>View on GitHub </a>
+      </div>
+	  <div class="tool-card rounded-2xl p-6 bg-white border border-slate-200 flex flex-col">
+  
+		<div class="flex items-center gap-3 mb-4">
+			<div class="w-10 h-10 rounded-lg bg-navy flex items-center justify-center">
+				<i data-lucide="dna" style="width:18px;height:18px;color:#0ea5e9;"></i>
+			</div>
+			<span class="mono font-semibold text-navy">Prokaryotic RNA-Seq</span>
+		</div>
+
+		<p class="text-sm leading-relaxed flex-1 mb-5" style="color:#64748b;">
+			A comprehensive pipeline for prokaryotic RNA-Seq analysis, including quality control, alignment, transcript quantification, and differential expression. Designed for reproducibility and scalability using modern workflow practices.
+		</p>
+
+		<a href="https://github.com/jkbomics/ProkaryoticRnaSeq"
+			target="_blank"
+			rel="noopener noreferrer"
+			class="inline-flex items-center gap-2 mono text-xs font-medium text-teal hover:text-teal-dark transition-colors">
+     
+			<i data-lucide="github" style="width:14px;height:14px;"></i>
+			View on GitHub
+		</a>
+
+	</div>
+     </div>
+    </div>
+   </section><!-- Why Choose -->
+   <section class="py-20 md:py-28 px-6 bg-white">
+    <div class="max-w-5xl mx-auto">
+     <div class="text-center mb-16"><span class="mono text-xs font-medium text-teal tracking-wider uppercase">Why jkbomics</span>
+      <h2 class="text-3xl md:text-4xl font-bold text-navy mt-3">Built for Research</h2>
+     </div>
+     <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
+      <div class="text-center p-5">
+       <div class="w-12 h-12 rounded-xl bg-teal/10 flex items-center justify-center mx-auto mb-3"><i data-lucide="repeat" style="width:20px;height:20px;color:#0ea5e9;"></i>
+       </div>
+       <h4 class="font-semibold text-navy text-sm mb-1">Reproducible</h4>
+       <p class="text-xs" style="color:#94a3b8;">Containerized, versioned pipelines</p>
+      </div>
+      <div class="text-center p-5">
+       <div class="w-12 h-12 rounded-xl bg-teal/10 flex items-center justify-center mx-auto mb-3"><i data-lucide="brain" style="width:20px;height:20px;color:#0ea5e9;"></i>
+       </div>
+       <h4 class="font-semibold text-navy text-sm mb-1">AI-Integrated</h4>
+       <p class="text-xs" style="color:#94a3b8;">ML-powered interpretation</p>
+      </div>
+      <div class="text-center p-5">
+       <div class="w-12 h-12 rounded-xl bg-teal/10 flex items-center justify-center mx-auto mb-3"><i data-lucide="zap" style="width:20px;height:20px;color:#0ea5e9;"></i>
+       </div>
+       <h4 class="font-semibold text-navy text-sm mb-1">Fast Turnaround</h4>
+       <p class="text-xs" style="color:#94a3b8;">Efficient delivery cycles</p>
+      </div>
+      <div class="text-center p-5">
+       <div class="w-12 h-12 rounded-xl bg-teal/10 flex items-center justify-center mx-auto mb-3"><i data-lucide="settings" style="width:20px;height:20px;color:#0ea5e9;"></i>
+       </div>
+       <h4 class="font-semibold text-navy text-sm mb-1">Custom Solutions</h4>
+       <p class="text-xs" style="color:#94a3b8;">Tailored to your data</p>
+      </div>
+      <div class="text-center p-5">
+       <div class="w-12 h-12 rounded-xl bg-teal/10 flex items-center justify-center mx-auto mb-3"><i data-lucide="award" style="width:20px;height:20px;color:#0ea5e9;"></i>
+       </div>
+       <h4 class="font-semibold text-navy text-sm mb-1">Research-Grade</h4>
+       <p class="text-xs" style="color:#94a3b8;">Publication-ready outputs</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- CTA -->
+   <section class="py-20 md:py-28 px-6 relative overflow-hidden" style="background:linear-gradient(135deg,#0B3C5D,#072a42);">
+    <div class="absolute top-0 right-0 w-96 h-96 rounded-full pulse-bg" style="background:radial-gradient(circle,#0ea5e9,transparent 70%);transform:translate(30%,-30%);"></div>
+    <div class="max-w-3xl mx-auto text-center relative z-10">
+     <h2 id="cta-text" class="text-2xl md:text-4xl font-bold text-white mb-6">Looking to analyze your sequencing data or build scalable pipelines?</h2>
+     <p class="text-base mb-8" style="color:rgba(255,255,255,.6);">Let's discuss your project and find the best bioinformatics solution together.</p><a href="#contact" class="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-navy bg-teal hover:bg-teal-dark transition-colors hover:shadow-lg hover:shadow-teal/20"> Contact for Collaboration <i data-lucide="arrow-right" style="width:18px;height:18px;"></i> </a>
+    </div>
+   </section><!-- Contact -->
+   <section id="contact" class="py-20 md:py-28 px-6" style="background:#f8fafc;">
+    <div class="max-w-4xl mx-auto">
+     <div class="text-center mb-12"><span class="mono text-xs font-medium text-teal tracking-wider uppercase">Get in Touch</span>
+      <h2 class="text-3xl md:text-4xl font-bold text-navy mt-3">Contact</h2>
+     </div>
+     <div class="grid md:grid-cols-2 gap-8">
+      <div>
+       <div class="rounded-2xl p-8 bg-white border border-slate-200">
+        <h3 class="font-semibold text-navy mb-6">Send a message</h3>
+        <form
+			id="contact-form"
+			name="contact"
+			method="POST"
+			data-netlify="true"
+			netlify-honeypot="bot-field"
+			 class="flex flex-col gap-4"
+		>
+
+		  <!-- Hidden Netlify form name -->
+		  <input type="hidden" name="form-name" value="contact">
+
+		  <!-- Spam protection -->
+		  <p hidden>
+			<label>
+			  Don’t fill this out:
+			  <input name="bot-field" />
+			</label>
+		  </p>
+
+		  <!-- Name -->
+		  <div>
+			<label for="name" class="block text-sm font-medium text-navy mb-1.5">
+			  Name
+			</label>
+
+			<input
+			  id="name"
+			  name="name"
+			  type="text"
+			  placeholder="Your name"
+			  class="w-full px-4 py-2.5 rounded-lg border border-slate-200 text-sm focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal transition-colors"
+			  required
+			>
+		  </div>
+
+		  <!-- Email -->
+		  <div>
+			<label for="email" class="block text-sm font-medium text-navy mb-1.5">
+			  Email
+			</label>
+
+			<input
+			  id="email"
+			  name="email"
+			  type="email"
+			  placeholder="you@example.com"
+			  class="w-full px-4 py-2.5 rounded-lg border border-slate-200 text-sm focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal transition-colors"
+			  required
+			>
+		  </div>
+
+		  <!-- Company -->
+		  <div>
+			<label for="company" class="block text-sm font-medium text-navy mb-1.5">
+			  Company / Organization
+			</label>
+
+			<input
+			  id="company"
+			  name="company"
+			  type="text"
+			  placeholder="Company name"
+			  class="w-full px-4 py-2.5 rounded-lg border border-slate-200 text-sm focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal transition-colors"
+			>
+		  </div>
+
+		  <!-- Service Type -->
+		  <div>
+			<label for="service" class="block text-sm font-medium text-navy mb-1.5">
+			  Service Interested In
+			</label>
+
+			<select
+			  id="service"
+			  name="service"
+			  class="w-full px-4 py-2.5 rounded-lg border border-slate-200 text-sm focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal transition-colors"
+			>
+			  <option>RNA-Seq Analysis</option>
+			  <option>Metagenomics</option>
+			  <option>WGS Analysis</option>
+			  <option>Custom Bioinformatics Tool</option>
+			  <option>AI Bioinformatics</option>
+			  <option>Pipeline Development</option>
+			  <option>Training / Workshops</option>
+			  <option>Others</option>
+			</select>
+		  </div>
+
+		  <!-- Message -->
+		  <div>
+			<label for="message" class="block text-sm font-medium text-navy mb-1.5">
+			  Message
+			</label>
+
+			<textarea
+			  id="message"
+			  name="message"
+			  rows="4"
+			  placeholder="Tell me about your project..."
+			  class="w-full px-4 py-2.5 rounded-lg border border-slate-200 text-sm focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal transition-colors resize-none"
+			  required
+			></textarea>
+		  </div>
+
+		  <!-- Submit -->
+		  <button
+			type="submit"
+			class="w-full py-3 rounded-lg font-semibold text-white bg-navy hover:bg-navy-dark transition-colors"
+		  >
+			Send Message
+		  </button>
+          <input type="hidden" name="subject" value="New JKBomics Contact Form Submission">
+		</form>
+       </div>
+      </div>
+      <div class="flex flex-col gap-5">
+       <div class="rounded-2xl p-6 bg-white border border-slate-200">
+        <div class="flex items-center gap-4">
+         <div class="w-10 h-10 rounded-lg bg-teal/10 flex items-center justify-center flex-shrink-0"><i data-lucide="mail" style="width:18px;height:18px;color:#0ea5e9;"></i>
+         </div>
+         <div>
+          <p class="text-sm font-medium text-navy">Email</p>
+          <p id="contact-email" class="mono text-sm" style="color:#64748b;">jkbomics@gmail.com</p>
+         </div>
+        </div>
+       </div>
+       <div class="rounded-2xl p-6 bg-white border border-slate-200">
+        <div class="flex items-center gap-4">
+         <div class="w-10 h-10 rounded-lg bg-teal/10 flex items-center justify-center flex-shrink-0"><i data-lucide="github" style="width:18px;height:18px;color:#0ea5e9;"></i>
+         </div>
+         <div>
+          <p class="text-sm font-medium text-navy">GitHub</p><a href="https://github.com/jkbomics" target="_blank" rel="noopener noreferrer" class="mono text-sm text-teal hover:text-teal-dark transition-colors">github.com/jkbomics</a>
+         </div>
+        </div>
+       </div>
+       <div class="rounded-2xl p-6 bg-white border border-slate-200">
+        <div class="flex items-center gap-4">
+         <div class="w-10 h-10 rounded-lg bg-teal/10 flex items-center justify-center flex-shrink-0"><i data-lucide="linkedin" style="width:18px;height:18px;color:#0ea5e9;"></i>
+         </div>
+         <div>
+          <p class="text-sm font-medium text-navy">LinkedIn</p><a href="https://www.linkedin.com/in/helga-jenifer-m-208977147/" target="_blank" rel="noopener noreferrer" class="mono text-sm text-teal hover:text-teal-dark transition-colors">linkedin.com/in/helga-jenifer-m-208977147</a>
+         </div>
+        </div>
+       </div>
+       <div class="rounded-2xl p-8 text-center" style="background:linear-gradient(135deg,#0B3C5D,#072a42);border:1px solid rgba(14,165,233,.15);">
+        <p class="text-sm font-medium text-white mb-1">Open to collaborations</p>
+        <p class="mono text-xs" style="color:rgba(255,255,255,.5);">Academic &amp; Industry Projects</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Footer -->
+   <footer class="py-8 px-6 bg-white border-t" style="border-color:#e2e8f0;">
+    <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+     <div class="flex items-center gap-2">
+      <div class="w-6 h-6">
+		<img src="frontend/assets/logo.png" alt="jkbomics logo" class="w-full h-full object-contain">
+      </div><span class="mono text-sm text-navy font-medium">JKBomics</span>
+     </div>
+     <p class="text-xs" style="color:#94a3b8;">© 2025 JKBomics. All rights reserved.</p>
+    </div>
+   </footer>
+  </div>
+  <script>
+// Element SDK
+const defaultConfig = {
+  hero_title: "JKBomics – AI-driven Bioinformatics & NGS Data Solutions",
+  hero_subtitle: "Empowering genomics research with scalable pipelines, intelligent analysis, and automation.",
+  about_text: "Freelance bioinformatician specializing in RNA-Seq, metagenomics, whole genome sequencing, and custom pipeline development. I integrate AI-driven approaches into every workflow — delivering scalable, reproducible, and research-grade results for both academic and industry projects.",
+  cta_text: "Looking to analyze your sequencing data or build scalable pipelines?",
+  contact_email: "jkbomics@gmail.com",
+  background_color: "#0B3C5D",
+  surface_color: "#f8fafc",
+  text_color: "#1e293b",
+  accent_color: "#0ea5e9",
+  card_color: "#ffffff",
+  font_family: "DM Sans",
+  font_size: 16
+};
+
+async function onConfigChange(config) {
+  const c = key => config[key] || defaultConfig[key];
+
+  document.getElementById('hero-title').innerHTML = c('hero_title').replace('&', '&amp;<br class="hidden md:block">');
+  document.getElementById('hero-subtitle').textContent = c('hero_subtitle');
+  document.getElementById('about-text').textContent = c('about_text');
+  document.getElementById('cta-text').textContent = c('cta_text');
+  document.getElementById('contact-email').textContent = c('contact_email');
+
+  // Colors
+  const bg = c('background_color');
+  const surface = c('surface_color');
+  const text = c('text_color');
+  const accent = c('accent_color');
+  const card = c('card_color');
+
+  document.getElementById('app').style.color = text;
+  document.querySelectorAll('#about, #tools, #contact').forEach(s => s.style.background = surface);
+  document.querySelectorAll('.service-card, .tool-card, #contact form').forEach(el => {
+    if (!el.classList.contains('lg:col-span-2')) el.style.background = card;
+  });
+
+  // Font
+  const font = c('font_family');
+  const baseStack = 'DM Sans, sans-serif';
+  const ff = `${font}, ${baseStack}`;
+  document.body.style.fontFamily = ff;
+
+  const baseSize = c('font_size');
+  document.querySelectorAll('h1').forEach(el => el.style.fontSize = `${baseSize * 2.5}px`);
+  document.querySelectorAll('h2').forEach(el => el.style.fontSize = `${baseSize * 2}px`);
+  document.querySelectorAll('h3').forEach(el => el.style.fontSize = `${baseSize * 1.125}px`);
+  document.querySelectorAll('p, label, textarea, input').forEach(el => {
+    if (!el.classList.contains('mono') && !el.closest('.mono')) el.style.fontSize = `${baseSize}px`;
+  });
+}
+
+function makeMutable(key) {
+  return {
+    get: () => (window.elementSdk.config && window.elementSdk.config[key]) || defaultConfig[key],
+    set: (v) => { window.elementSdk.config[key] = v; window.elementSdk.setConfig({ [key]: v }); }
+  };
+}
+
+window.elementSdk.init({
+  defaultConfig,
+  onConfigChange,
+  mapToCapabilities: (config) => ({
+    recolorables: [
+      makeMutable('background_color'),
+      makeMutable('surface_color'),
+      makeMutable('text_color'),
+      makeMutable('accent_color'),
+      makeMutable('card_color')
+    ],
+    borderables: [],
+    fontEditable: makeMutable('font_family'),
+    fontSizeable: makeMutable('font_size')
+  }),
+  mapToEditPanelValues: (config) => new Map([
+    ["hero_title", config.hero_title || defaultConfig.hero_title],
+    ["hero_subtitle", config.hero_subtitle || defaultConfig.hero_subtitle],
+    ["about_text", config.about_text || defaultConfig.about_text],
+    ["cta_text", config.cta_text || defaultConfig.cta_text],
+    ["contact_email", config.contact_email || defaultConfig.contact_email]
+  ])
+});
+
+// Initialize Lucide icons with proper timing
+function initLucide() {
+  if (typeof lucide !== 'undefined' && lucide.createIcons) {
+    lucide.createIcons();
+  } else {
+    setTimeout(initLucide, 100);
+  }
+}
+
+// Try immediate init
+initLucide();
+
+// Also init on DOMContentLoaded as backup
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initLucide);
+}
+
+// Re-init after config changes to catch any dynamically rendered icons
+const originalSetConfig = window.elementSdk.setConfig;
+window.elementSdk.setConfig = function(config) {
+  const result = originalSetConfig.call(this, config);
+  if (result && result.then) {
+    result.then(() => {
+      setTimeout(() => lucide.createIcons(), 50);
+    });
+  } else {
+    setTimeout(() => lucide.createIcons(), 50);
+  }
+  return result;
+};
+</script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f61867b54442c0c',t:'MTc3NzgzNTAwMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
