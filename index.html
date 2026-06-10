@@ -284,122 +284,204 @@ window.elementSdk = { init: function(){}, setConfig: function(){}, config: {} };
      <div class="grid md:grid-cols-2 gap-8">
       <div>
        <div class="rounded-2xl p-8 bg-white border border-slate-200">
-        <h3 class="font-semibold text-navy mb-6">Send a message</h3>
-        <form
-			id="contact-form"
-			name="contact"
-			method="POST"
-      action="/success.html"
-			data-netlify="true"
-			netlify-honeypot="bot-field"
-			 class="flex flex-col gap-4"
-		>
+        <!-- CONTACT SECTION -->
 
-		  <!-- Hidden Netlify form name -->
-		  <input type="hidden" name="form-name" value="contact">
+<div>
+  <div class="rounded-2xl p-8 bg-white border border-slate-200">
 
-		  <!-- Spam protection -->
-		  <p hidden>
-			<label>
-			  Don’t fill this out:
-			  <input name="bot-field" />
-			</label>
-		  </p>
+```
+<h3 class="font-semibold text-navy mb-6">
+  Send a message
+</h3>
 
-		  <!-- Name -->
-		  <div>
-			<label for="name" class="block text-sm font-medium text-navy mb-1.5">
-			  Name
-			</label>
+<form
+  id="contact-form"
+  name="contact"
+  method="POST"
+  data-netlify="true"
+  netlify-honeypot="bot-field"
+  class="flex flex-col gap-4"
+>
 
-			<input
-			  id="name"
-			  name="name"
-			  type="text"
-			  placeholder="Your name"
-			  class="w-full px-4 py-2.5 rounded-lg border border-slate-200 text-sm focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal transition-colors"
-			  required
-			>
-		  </div>
+  <!-- Hidden Netlify form name -->
+  <input type="hidden" name="form-name" value="contact">
 
-		  <!-- Email -->
-		  <div>
-			<label for="email" class="block text-sm font-medium text-navy mb-1.5">
-			  Email
-			</label>
+  <!-- Spam protection -->
+  <p hidden>
+    <label>
+      Don’t fill this out:
+      <input name="bot-field" />
+    </label>
+  </p>
 
-			<input
-			  id="email"
-			  name="email"
-			  type="email"
-			  placeholder="you@example.com"
-			  class="w-full px-4 py-2.5 rounded-lg border border-slate-200 text-sm focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal transition-colors"
-			  required
-			>
-		  </div>
+  <!-- Success message -->
+  <p
+    id="success-message"
+    style="display:none;color:green;font-weight:bold;"
+  >
+    Thank you! Your message has been sent successfully.
+  </p>
 
-		  <!-- Company -->
-		  <div>
-			<label for="company" class="block text-sm font-medium text-navy mb-1.5">
-			  Company / Organization
-			</label>
+  <!-- Name -->
+  <div>
+    <label
+      for="name"
+      class="block text-sm font-medium text-navy mb-1.5"
+    >
+      Name
+    </label>
 
-			<input
-			  id="company"
-			  name="company"
-			  type="text"
-			  placeholder="Company name"
-			  class="w-full px-4 py-2.5 rounded-lg border border-slate-200 text-sm focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal transition-colors"
-			>
-		  </div>
+    <input
+      id="name"
+      name="name"
+      type="text"
+      placeholder="Your name"
+      class="w-full px-4 py-2.5 rounded-lg border border-slate-200 text-sm focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal transition-colors"
+      required
+    >
+  </div>
 
-		  <!-- Service Type -->
-		  <div>
-			<label for="service" class="block text-sm font-medium text-navy mb-1.5">
-			  Service Interested In
-			</label>
+  <!-- Email -->
+  <div>
+    <label
+      for="email"
+      class="block text-sm font-medium text-navy mb-1.5"
+    >
+      Email
+    </label>
 
-			<select
-			  id="service"
-			  name="service"
-			  class="w-full px-4 py-2.5 rounded-lg border border-slate-200 text-sm focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal transition-colors"
-			>
-			  <option>RNA-Seq Analysis</option>
-			  <option>Metagenomics</option>
-			  <option>WGS Analysis</option>
-			  <option>Custom Bioinformatics Tool</option>
-			  <option>AI Bioinformatics</option>
-			  <option>Pipeline Development</option>
-			  <option>Training / Workshops</option>
-			  <option>Others</option>
-			</select>
-		  </div>
+    <input
+      id="email"
+      name="email"
+      type="email"
+      placeholder="you@example.com"
+      class="w-full px-4 py-2.5 rounded-lg border border-slate-200 text-sm focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal transition-colors"
+      required
+    >
+  </div>
 
-		  <!-- Message -->
-		  <div>
-			<label for="message" class="block text-sm font-medium text-navy mb-1.5">
-			  Message
-			</label>
+  <!-- Company -->
+  <div>
+    <label
+      for="company"
+      class="block text-sm font-medium text-navy mb-1.5"
+    >
+      Company / Organization
+    </label>
 
-			<textarea
-			  id="message"
-			  name="message"
-			  rows="4"
-			  placeholder="Tell me about your project..."
-			  class="w-full px-4 py-2.5 rounded-lg border border-slate-200 text-sm focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal transition-colors resize-none"
-			  required
-			></textarea>
-		  </div>
+    <input
+      id="company"
+      name="company"
+      type="text"
+      placeholder="Company name"
+      class="w-full px-4 py-2.5 rounded-lg border border-slate-200 text-sm focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal transition-colors"
+    >
+  </div>
 
-		  <!-- Submit -->
-		  <button
-			type="submit"
-			class="w-full py-3 rounded-lg font-semibold text-white bg-navy hover:bg-navy-dark transition-colors"
-		  >
-			Send Message
-		  </button>
-          <input type="hidden" name="subject" value="New JKBomics Contact Form Submission">
-		</form>
+  <!-- Service -->
+  <div>
+    <label
+      for="service"
+      class="block text-sm font-medium text-navy mb-1.5"
+    >
+      Service Interested In
+    </label>
+
+    <select
+      id="service"
+      name="service"
+      class="w-full px-4 py-2.5 rounded-lg border border-slate-200 text-sm focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal transition-colors"
+    >
+      <option>RNA-Seq Analysis</option>
+      <option>Metagenomics</option>
+      <option>WGS Analysis</option>
+      <option>Custom Bioinformatics Tool</option>
+      <option>AI Bioinformatics</option>
+      <option>Pipeline Development</option>
+      <option>Training / Workshops</option>
+      <option>Others</option>
+    </select>
+  </div>
+
+  <!-- Message -->
+  <div>
+    <label
+      for="message"
+      class="block text-sm font-medium text-navy mb-1.5"
+    >
+      Message
+    </label>
+
+    <textarea
+      id="message"
+      name="message"
+      rows="4"
+      placeholder="Tell me about your project..."
+      class="w-full px-4 py-2.5 rounded-lg border border-slate-200 text-sm focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal transition-colors resize-none"
+      required
+    ></textarea>
+  </div>
+
+  <!-- Submit Button -->
+  <button
+    type="submit"
+    class="w-full py-3 rounded-lg font-semibold text-white bg-navy hover:bg-navy-dark transition-colors"
+  >
+    Send Message
+  </button>
+
+</form>
+```
+
+  </div>
+</div>
+
+<!-- CONTACT FORM SCRIPT -->
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const form = document.querySelector("form[name='contact']");
+
+  form.addEventListener("submit", async function (e) {
+
+    e.preventDefault();
+
+    const formData = new FormData(form);
+
+    try {
+
+      const response = await fetch("/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: new URLSearchParams(formData).toString(),
+      });
+
+      if (response.ok) {
+
+        document.getElementById("success-message").style.display = "block";
+
+        form.reset();
+
+      } else {
+
+        alert("Something went wrong.");
+
+      }
+
+    } catch (error) {
+
+      alert("Submission failed.");
+
+    }
+
+  });
+
+});
+</script>
+
        </div>
       </div>
       <div class="flex flex-col gap-5">
